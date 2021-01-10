@@ -35,45 +35,17 @@ public class BaseDatos {
         return db;
     }
 
-    /*
-     * ConexiÃ³n a la DB
-     */
+    
     public Connection estableceConexion() {
         if (conexion != null) {
             return conexion;
         }
         try {
-            // Se registra el Driver de MySQL
-//            Class.forName("com.mysql.jdbc.Driver");
-            //pruebo con un ping si puedo acceder al HOST o tengo problemas de conexion
-//            boolean estadoConexion = PingExample(host);
-
-//            System.out.println(estadoConexion);
-            //si la conexion falla trabajo con la base de datos local
-            //primera opcion que el estadoConexion sea true por ende hay internet, se conecta a la base de datos de internet
-//            if (estadoConexion) {
+            
             String urlConexion = "jdbc:mysql://" + host + ":" + puerto + "/" + db+ zonakey; 
-                                //jdbc:mysql://localhost:3306/cajeroprofe?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true  
-//                System.out.println(urlConexion);
-//            String urlConexion = "jdbc:mysql://" + host + "," + user + "," + password + "," + db;
+
             conexion = DriverManager.getConnection(urlConexion, user, password);
-//                return conexion;
-            //si no hay conexion se va a coentar a la base de datos local
-//            } else {
-//                //establesco parametros de conexion local
-//                Connection conexion = null;
-//                String user = "root";
-//                String password = "CuartoPiso4";
-//                String puerto = "3306";
-//                String db = "cooperativa";
-//                String host = "localhost";
-//                String urlConexion = "jdbc:mysql://" + host + ":" + puerto + "/" + db;
-////                
-////                String urlConexion = "jdbc:mysql://" + host + "," + user + "," + password + "," + db;
-//                conexion = DriverManager.getConnection(urlConexion, user, password);
-//                System.out.println(conexion);
-//                return conexion;
-//            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
