@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.crearTabla;
+import javax.swing.JOptionPane;
 import modelo.Accion;
 
 
@@ -193,8 +194,8 @@ public class crearAccion extends javax.swing.JFrame {
         crearTabla cTabla = new crearTabla();
         cTabla.crearACcion(acc);
         
-        
-        
+        JOptionPane.showMessageDialog(null,"Accion cargada");
+        dispose();
     }//GEN-LAST:event_botGuardarActionPerformed
 
     /**
