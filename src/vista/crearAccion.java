@@ -15,6 +15,7 @@ public class crearAccion extends javax.swing.JFrame {
     
     public crearAccion() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
    
@@ -196,6 +197,7 @@ public class crearAccion extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null,"Accion cargada");
         dispose();
+        
     }//GEN-LAST:event_botGuardarActionPerformed
 
     /**
