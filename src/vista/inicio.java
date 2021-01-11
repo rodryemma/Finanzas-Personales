@@ -299,8 +299,13 @@ public class inicio extends javax.swing.JFrame {
         this.listaIDAcciones=selTab.seleccionarIDAccion();
         
         AccionPK accPK = new AccionPK();
-        accPK.setIdAccion(Integer.getInteger(this.listaIDAcciones.getValueAt(fila, 0).toString()));
-        accPK.setIdinversor(Integer.getInteger(this.listaIDAcciones.getValueAt(fila, 1).toString()));
+        accPK.setIdAccion(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 0).toString()));
+        accPK.setIdinversor(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 1).toString()));
+        
+       editarAccion editAcc = new editarAccion();
+       editAcc.cargartxt(acc, accPK);
+       editAcc.setVisible(true);
+       setVisible(false);
     }//GEN-LAST:event_botModificarActionPerformed
 
     
