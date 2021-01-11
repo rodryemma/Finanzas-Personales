@@ -206,7 +206,7 @@ public class editarAccion extends javax.swing.JFrame {
         editTab.editarAccion(acc, accPK);
         
         inicio ini = new inicio();
-        ini.setVisible(false);
+        
         ini.setVisible(true);
         JOptionPane.showMessageDialog(null, "Accion editada");
         dispose();
