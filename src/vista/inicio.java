@@ -7,9 +7,14 @@ package vista;
 
 import controlador.selecTabla;
 import javax.swing.table.DefaultTableModel;
+import modelo.Accion;
+import modelo.AccionPK;
 
 public class inicio extends javax.swing.JFrame {
 
+    DefaultTableModel listaAcciones;
+    DefaultTableModel listaIDAcciones;
+    
     public inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -85,6 +90,11 @@ public class inicio extends javax.swing.JFrame {
         });
 
         botModificar.setText("Modificar");
+        botModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -254,12 +264,11 @@ public class inicio extends javax.swing.JFrame {
     }
 
     public void cargarVentana() {
-        DefaultTableModel listaAcciones = null;
-
+        
         selecTabla selTab = new selecTabla();
-        listaAcciones = selTab.seleccionarAccion();
+        this.listaAcciones = selTab.seleccionarAccion();
 
-        tabAcciones.setModel(listaAcciones);
+        tabAcciones.setModel(this.listaAcciones);
     }
 
     private void botComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botComprarActionPerformed
@@ -277,9 +286,26 @@ public class inicio extends javax.swing.JFrame {
         habilitarBot();
     }//GEN-LAST:event_tabAccionesMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void botModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botModificarActionPerformed
+       Accion acc = new Accion();
+        //SE guarda la fila seleccionada de Jtable pero solo tiene 3 campos
+        int fila = tabAcciones.getSelectedRow();
+        acc.setNombre(this.listaAcciones.getValueAt(fila, 0).toString());
+        acc.setSimbolo(this.listaAcciones.getValueAt(fila, 1).toString());
+        acc.setTipo(this.listaAcciones.getValueAt(fila, 2).toString());
+        acc.setUltimoPrecio(Double.parseDouble(this.listaAcciones.getValueAt(fila, 5).toString()));
+        
+        selecTabla selTab = new selecTabla();
+        this.listaIDAcciones=selTab.seleccionarIDAccion();
+        
+        AccionPK accPK = new AccionPK();
+        accPK.setIdAccion(Integer.getInteger(this.listaIDAcciones.getValueAt(fila, 0).toString()));
+        accPK.setIdinversor(Integer.getInteger(this.listaIDAcciones.getValueAt(fila, 1).toString()));
+    }//GEN-LAST:event_botModificarActionPerformed
+
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
