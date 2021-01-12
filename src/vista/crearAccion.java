@@ -178,7 +178,8 @@ public class crearAccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCancelarActionPerformed
-        
+        inicio ini = new inicio();
+        ini.setVisible(true);
         dispose();
         
     }//GEN-LAST:event_botCancelarActionPerformed
@@ -196,6 +197,11 @@ public class crearAccion extends javax.swing.JFrame {
         cTabla.crearACcion(acc);
         
         JOptionPane.showMessageDialog(null,"Accion cargada");
+        
+        inicio ini =
+        new inicio();
+        ini.setVisible(true);
+        
         dispose();
         
     }//GEN-LAST:event_botGuardarActionPerformed

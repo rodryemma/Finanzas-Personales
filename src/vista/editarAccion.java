@@ -188,6 +188,8 @@ public class editarAccion extends javax.swing.JFrame {
 }
     
     private void botCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCancelarActionPerformed
+        inicio ini = new inicio();
+        ini.setVisible(true);
         dispose();
 
     }//GEN-LAST:event_botCancelarActionPerformed

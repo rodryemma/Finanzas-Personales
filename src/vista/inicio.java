@@ -279,7 +279,7 @@ public class inicio extends javax.swing.JFrame {
     private void botCrearAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearAcActionPerformed
         crearAccion crearAc = new crearAccion();
         crearAc.setVisible(true);
-
+        this.setVisible(false);
     }//GEN-LAST:event_botCrearAcActionPerformed
 
     private void tabAccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabAccionesMouseClicked
