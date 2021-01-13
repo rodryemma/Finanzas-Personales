@@ -11,7 +11,8 @@ import modelo.Accion;
 
 
 public class crearAccion extends javax.swing.JFrame {
-
+    
+    inicio ini;
     
     public crearAccion() {
         initComponents();
@@ -177,9 +178,12 @@ public class crearAccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void obtenerInicio(inicio ini){
+        this.ini=ini;
+    }
+    
     private void botCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCancelarActionPerformed
-        inicio ini = new inicio();
-        ini.setVisible(true);
+        
         dispose();
         
     }//GEN-LAST:event_botCancelarActionPerformed
@@ -198,11 +202,11 @@ public class crearAccion extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null,"Accion cargada");
         
-        inicio ini =
+      /*  inicio ini =
         new inicio();
-        ini.setVisible(true);
-        
+        ini.setVisible(true);*/
         dispose();
+        ini.cargarVentana();
         
     }//GEN-LAST:event_botGuardarActionPerformed
 

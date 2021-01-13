@@ -14,7 +14,7 @@ import modelo.AccionPK;
 public class editarAccion extends javax.swing.JFrame {
 
     AccionPK accPK; 
-    
+    inicio ini;
     public editarAccion() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -186,10 +186,15 @@ public class editarAccion extends javax.swing.JFrame {
     txtTipo.setText(acc.getTipo());
     txtUltPrecio.setText(String.valueOf(acc.getUltimoPrecio()));
 }
+  
+    public void obtenerInicio(inicio ini){
+       //guardamos el objeto creado en inicio para poder controlar la ventana en otra
+        this.ini=ini;
+    }
     
     private void botCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCancelarActionPerformed
-        inicio ini = new inicio();
-        ini.setVisible(true);
+       /* inicio ini = new inicio();
+        ini.setVisible(true);*/
         dispose();
 
     }//GEN-LAST:event_botCancelarActionPerformed
@@ -207,12 +212,11 @@ public class editarAccion extends javax.swing.JFrame {
         editarTabla editTab = new editarTabla();
         editTab.editarAccion(acc, accPK);
         
-        inicio ini = new inicio();
         
-        ini.setVisible(true);
         JOptionPane.showMessageDialog(null, "Accion editada");
         dispose();
-
+        ini.cargarVentana();
+       
     }//GEN-LAST:event_botGuardarActionPerformed
 
     /**

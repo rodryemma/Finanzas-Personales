@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.selecTabla;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modelo.Accion;
 import modelo.AccionPK;
@@ -43,7 +44,7 @@ public class inicio extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        botCerrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -184,7 +185,12 @@ public class inicio extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setText("Cerrar sesion");
+        botCerrar.setText("Cerrar sesion");
+        botCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -192,14 +198,14 @@ public class inicio extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(botCerrar)
                 .addGap(260, 260, 260))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(botCerrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -251,6 +257,7 @@ public class inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     public void desactivarBot() {
         botComprar.setEnabled(false);
         botVender.setEnabled(false);
@@ -278,8 +285,10 @@ public class inicio extends javax.swing.JFrame {
 
     private void botCrearAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearAcActionPerformed
         crearAccion crearAc = new crearAccion();
+        crearAc.obtenerInicio(this);
         crearAc.setVisible(true);
-        this.setVisible(false);
+        
+               
     }//GEN-LAST:event_botCrearAcActionPerformed
 
     private void tabAccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabAccionesMouseClicked
@@ -304,9 +313,18 @@ public class inicio extends javax.swing.JFrame {
         
        editarAccion editAcc = new editarAccion();
        editAcc.cargartxt(acc, accPK);
+       //Se envia el objeto para poder controlarlo de otra ventana
+       editAcc.obtenerInicio(this);
+       //Se pone visible editaraccion
        editAcc.setVisible(true);
-       setVisible(false);
+       
+       
+       
     }//GEN-LAST:event_botModificarActionPerformed
+
+    private void botCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCerrarActionPerformed
+           System.exit(0);
+    }//GEN-LAST:event_botCerrarActionPerformed
 
     
     
@@ -344,11 +362,11 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botCerrar;
     private javax.swing.JButton botComprar;
     private javax.swing.JButton botCrearAc;
     private javax.swing.JButton botModificar;
     private javax.swing.JButton botVender;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
