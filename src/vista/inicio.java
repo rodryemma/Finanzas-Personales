@@ -15,7 +15,7 @@ public class inicio extends javax.swing.JFrame {
 
     DefaultTableModel listaAcciones;
     DefaultTableModel listaIDAcciones;
-    
+
     public inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -257,7 +257,6 @@ public class inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public void desactivarBot() {
         botComprar.setEnabled(false);
         botVender.setEnabled(false);
@@ -271,7 +270,7 @@ public class inicio extends javax.swing.JFrame {
     }
 
     public void cargarVentana() {
-        
+
         selecTabla selTab = new selecTabla();
         this.listaAcciones = selTab.seleccionarAccion();
 
@@ -280,6 +279,27 @@ public class inicio extends javax.swing.JFrame {
 
     private void botComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botComprarActionPerformed
 
+        Accion acc = new Accion();
+        //SE guarda la fila seleccionada de Jtable pero solo tiene 3 campos
+        int fila = tabAcciones.getSelectedRow();
+
+        //se busca la tabla de idAcciones
+        selecTabla selTab = new selecTabla();
+        this.listaIDAcciones = selTab.seleccionarIDAccion();
+
+        //se guarda id de inversor y accion seleccionada
+        AccionPK accPK = new AccionPK();
+        accPK.setIdAccion(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 0).toString()));
+        accPK.setIdinversor(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 1).toString()));
+
+        //Se inicia objeto de gestionCompra
+        gestionCompra gestCompra = new gestionCompra();
+        gestCompra.cargarVentana(accPK);
+        //Se envia el objeto para poder controlarlo de otra ventana
+        gestCompra.obtenerIni(this);
+        //Se pone visible editaraccion 
+        gestCompra.setVisible(true);
+
 
     }//GEN-LAST:event_botComprarActionPerformed
 
@@ -287,8 +307,8 @@ public class inicio extends javax.swing.JFrame {
         crearAccion crearAc = new crearAccion();
         crearAc.obtenerInicio(this);
         crearAc.setVisible(true);
-        
-               
+
+
     }//GEN-LAST:event_botCrearAcActionPerformed
 
     private void tabAccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabAccionesMouseClicked
@@ -296,39 +316,35 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_tabAccionesMouseClicked
 
     private void botModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botModificarActionPerformed
-       Accion acc = new Accion();
+        Accion acc = new Accion();
         //SE guarda la fila seleccionada de Jtable pero solo tiene 3 campos
         int fila = tabAcciones.getSelectedRow();
         acc.setNombre(this.listaAcciones.getValueAt(fila, 0).toString());
         acc.setSimbolo(this.listaAcciones.getValueAt(fila, 1).toString());
         acc.setTipo(this.listaAcciones.getValueAt(fila, 2).toString());
         acc.setUltimoPrecio(Double.parseDouble(this.listaAcciones.getValueAt(fila, 5).toString()));
-        
+
         selecTabla selTab = new selecTabla();
-        this.listaIDAcciones=selTab.seleccionarIDAccion();
-        
+        this.listaIDAcciones = selTab.seleccionarIDAccion();
+
         AccionPK accPK = new AccionPK();
         accPK.setIdAccion(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 0).toString()));
         accPK.setIdinversor(Integer.parseInt(this.listaIDAcciones.getValueAt(fila, 1).toString()));
-        
-       editarAccion editAcc = new editarAccion();
-       editAcc.cargartxt(acc, accPK);
-       //Se envia el objeto para poder controlarlo de otra ventana
-       editAcc.obtenerInicio(this);
-       //Se pone visible editaraccion
-       editAcc.setVisible(true);
-       
-       
-       
+
+        editarAccion editAcc = new editarAccion();
+        editAcc.cargartxt(acc, accPK);
+        //Se envia el objeto para poder controlarlo de otra ventana
+        editAcc.obtenerInicio(this);
+        //Se pone visible editaraccion
+        editAcc.setVisible(true);
+
+
     }//GEN-LAST:event_botModificarActionPerformed
 
     private void botCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCerrarActionPerformed
-           System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_botCerrarActionPerformed
 
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
