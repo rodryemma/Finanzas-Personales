@@ -3,17 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/controlador/crearTabla.java</file>
-            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/gestionVenta.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/modelo/Accion.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/modelo/AccionPK.java</file>
-            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/crearAccion.java</file>
-            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/controlador/selecTabla.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/gestionCompra.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/controlador/editarTabla.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/inicio.java</file>
-            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/modelo/VentaPK.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/build/generated-sources/ap-source-output/modelo/AccionPK_.java</file>
             <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/editarAccion.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/controlador/crearTabla.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/gestionVenta.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/vista/crearAccion.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/controlador/selecTabla.java</file>
+            <file>file:/C:/Users/Rodry-Asus/Documents/NetBeansProjects/Finanzas%20Personales/src/modelo/VentaPK.java</file>
         </group>
     </open-files>
 </project-private>

@@ -29,28 +29,28 @@ import javax.persistence.Table;
     @NamedQuery(name = "Accion.findAll", query = "SELECT a FROM Accion a"),
     @NamedQuery(name = "Accion.findByIdAccion", query = "SELECT a FROM Accion a WHERE a.accionPK.idAccion = :idAccion"),
     @NamedQuery(name = "Accion.findByNombre", query = "SELECT a FROM Accion a WHERE a.nombre = :nombre"),
+    @NamedQuery(name = "Accion.findBySimbolo", query = "SELECT a FROM Accion a WHERE a.simbolo = :simbolo"),
     @NamedQuery(name = "Accion.findByUnidades", query = "SELECT a FROM Accion a WHERE a.unidades = :unidades"),
     @NamedQuery(name = "Accion.findByUltimoPrecio", query = "SELECT a FROM Accion a WHERE a.ultimoPrecio = :ultimoPrecio"),
+    @NamedQuery(name = "Accion.findByPpcompra", query = "SELECT a FROM Accion a WHERE a.ppcompra = :ppcompra"),
     @NamedQuery(name = "Accion.findByTipo", query = "SELECT a FROM Accion a WHERE a.tipo = :tipo"),
     @NamedQuery(name = "Accion.findByIdinversor", query = "SELECT a FROM Accion a WHERE a.accionPK.idinversor = :idinversor")})
 public class Accion implements Serializable {
-
-    @Column(name = "simbolo")
-    private String simbolo;
-
-    @Column(name = "ppcompra")
-    private Double ppcompra;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AccionPK accionPK;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "simbolo")
+    private String simbolo;
     @Column(name = "unidades")
     private Integer unidades;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ultimoPrecio")
     private Double ultimoPrecio;
+    @Column(name = "ppcompra")
+    private Double ppcompra;
     @Column(name = "tipo")
     private String tipo;
     @JoinColumn(name = "idinversor", referencedColumnName = "idinversor", insertable = false, updatable = false)
@@ -88,6 +88,14 @@ public class Accion implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getSimbolo() {
+        return simbolo;
+    }
+
+    public void setSimbolo(String simbolo) {
+        this.simbolo = simbolo;
+    }
+
     public Integer getUnidades() {
         return unidades;
     }
@@ -102,6 +110,14 @@ public class Accion implements Serializable {
 
     public void setUltimoPrecio(Double ultimoPrecio) {
         this.ultimoPrecio = ultimoPrecio;
+    }
+
+    public Double getPpcompra() {
+        return ppcompra;
+    }
+
+    public void setPpcompra(Double ppcompra) {
+        this.ppcompra = ppcompra;
     }
 
     public String getTipo() {
@@ -135,22 +151,6 @@ public class Accion implements Serializable {
     public void setVentaList(List<Venta> ventaList) {
         this.ventaList = ventaList;
     }
-    
-     public Double getPpcompra() {
-        return ppcompra;
-    }
-
-    public void setPpcompra(Double ppcompra) {
-        this.ppcompra = ppcompra;
-    }
-    
-     public String getSimbolo() {
-        return simbolo;
-    }
-
-    public void setSimbolo(String simbolo) {
-        this.simbolo = simbolo;
-    }
 
     @Override
     public int hashCode() {
@@ -176,9 +176,5 @@ public class Accion implements Serializable {
     public String toString() {
         return "modelo.Accion[ accionPK=" + accionPK + " ]";
     }
-
-   
-
-   
     
 }
