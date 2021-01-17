@@ -6,11 +6,14 @@
 package vista;
 
 import com.toedter.calendar.JCalendar;
+import controlador.crearTabla;
 import controlador.selecTabla;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.AccionPK;
+import modelo.Compra;
 
     
 
@@ -22,10 +25,12 @@ public class gestionCompra extends javax.swing.JFrame {
     AccionPK accPK;
     inicio ini;
     
+    
     public gestionCompra() {
         initComponents();
         inhabilitarBot();
         this.setLocationRelativeTo(null);
+        
     }
 
    
@@ -94,8 +99,6 @@ public class gestionCompra extends javax.swing.JFrame {
             }
         });
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -115,10 +118,11 @@ public class gestionCompra extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botGuardar))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(botGuardar)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +143,9 @@ public class gestionCompra extends javax.swing.JFrame {
                             .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(28, 28, 28)
                         .addComponent(botGuardar)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -211,7 +215,7 @@ public class gestionCompra extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,14 +245,30 @@ public class gestionCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     public Date obtenerCalendario(){
-        Date date =jDateChooser1.getDate();
-        long d = date.getTime();
-        java.sql.Date fecha = new java.sql.Date(d);
+        try{
+            Date date =jDateChooser1.getDate();
+            long d = date.getTime();
+            java.sql.Date fecha = new java.sql.Date(d);
+            return fecha; 
+        }
+        catch(java.lang.NullPointerException e){
+            e.printStackTrace(System.out);
+            JOptionPane.showMessageDialog(null, "Seleccionar fecha");
+            return null; 
+        }
+        
+           
+            
+                
         //System.out.println(fecha);
-        return fecha;
+       
+        
     }
     public void inhabilitarBot(){
+       
         botEliminar.setEnabled(false);
         botModificar.setEnabled(false);
     }
@@ -280,7 +300,26 @@ public class gestionCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_tabCompraMouseClicked
 
     private void botGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botGuardarActionPerformed
-        
+      
+        if (obtenerCalendario().equals(null)||txtCantidad.getText().toString().equals("")||txtNroCuenta.getText().toString().equals("")||txtPrecio.getText().toString().equals("") ){
+           
+           JOptionPane.showMessageDialog(null,"Completar los formularios");
+       }else{
+            Compra comp = new Compra();
+            comp.setActivo("true");
+            
+            String CantidadInt = txtCantidad.getText().toString();
+            comp.setCantidad(Integer.valueOf(CantidadInt));
+            
+            comp.setFecha(obtenerCalendario());
+            comp.setNumeroCompra(txtNroCuenta.getText().toString());
+            String precioD = txtPrecio.getText().toString();
+            comp.setPrecio(Double.parseDouble(precioD));
+            crearTabla crearT = new crearTabla();
+            
+            crearT.crearCompra(comp, accPK);
+        }
+       
     }//GEN-LAST:event_botGuardarActionPerformed
 
     
