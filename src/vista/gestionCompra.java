@@ -171,6 +171,11 @@ public class gestionCompra extends javax.swing.JFrame {
         botEliminar.setText("Eliminar");
 
         botModificar.setText("Modificar");
+        botModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botModificarActionPerformed(evt);
+            }
+        });
 
         botVolver.setText("Volver");
         botVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -296,11 +301,13 @@ public class gestionCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_botVolverActionPerformed
 
     private void tabCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabCompraMouseClicked
+        
         habilitarBot();
+        
     }//GEN-LAST:event_tabCompraMouseClicked
 
     private void botGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botGuardarActionPerformed
-      
+       inhabilitarBot();
         if (obtenerCalendario().equals(null)||txtCantidad.getText().toString().equals("")||txtNroCuenta.getText().toString().equals("")||txtPrecio.getText().toString().equals("") ){
            
            JOptionPane.showMessageDialog(null,"Completar los formularios");
@@ -321,6 +328,22 @@ public class gestionCompra extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_botGuardarActionPerformed
+
+    private void botModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botModificarActionPerformed
+        Compra compA= new Compra();
+        int fila = tabCompra.getSelectedRow();
+        
+        String precioC = this.listaCompraAcciones.getValueAt(fila, 0).toString();
+        
+        compA.setPrecio(Double.parseDouble(precioC));
+        compA.setCantidad(this.listaCompraAcciones.getValueAt(fila, 1).hashCode());
+        compA.setFecha((Date)this.listaCompraAcciones.getValueAt(fila, 2));
+        compA.setNumeroCompra(this.listaCompraAcciones.getValueAt(fila, 3).toString());
+        compA.setActivo("true");
+        
+        
+        
+    }//GEN-LAST:event_botModificarActionPerformed
 
     
     public static void main(String args[]) {

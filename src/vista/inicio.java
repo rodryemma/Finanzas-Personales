@@ -78,6 +78,11 @@ public class inicio extends javax.swing.JFrame {
         });
 
         botVender.setText("Vender");
+        botVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botVenderActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -300,10 +305,13 @@ public class inicio extends javax.swing.JFrame {
         //Se pone visible editaraccion 
         gestCompra.setVisible(true);
 
+        desactivarBot();
 
     }//GEN-LAST:event_botComprarActionPerformed
 
     private void botCrearAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCrearAcActionPerformed
+        desactivarBot();
+
         crearAccion crearAc = new crearAccion();
         crearAc.obtenerInicio(this);
         crearAc.setVisible(true);
@@ -337,13 +345,20 @@ public class inicio extends javax.swing.JFrame {
         editAcc.obtenerInicio(this);
         //Se pone visible editaraccion
         editAcc.setVisible(true);
-
+        desactivarBot();
 
     }//GEN-LAST:event_botModificarActionPerformed
 
     private void botCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCerrarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_botCerrarActionPerformed
+
+    private void botVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botVenderActionPerformed
+        
+        
+        
+        desactivarBot();
+    }//GEN-LAST:event_botVenderActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
