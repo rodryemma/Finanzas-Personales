@@ -330,6 +330,7 @@ public class gestionCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_botGuardarActionPerformed
 
     private void botModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botModificarActionPerformed
+      
         Compra compA= new Compra();
         int fila = tabCompra.getSelectedRow();
         
@@ -341,6 +342,9 @@ public class gestionCompra extends javax.swing.JFrame {
         compA.setNumeroCompra(this.listaCompraAcciones.getValueAt(fila, 3).toString());
         compA.setActivo("true");
         
+        editarCompra editCom = new editarCompra();
+        editCom.cargarTxt(compA, this.accPK, this);
+        editCom.setVisible(true);
         
         
     }//GEN-LAST:event_botModificarActionPerformed
