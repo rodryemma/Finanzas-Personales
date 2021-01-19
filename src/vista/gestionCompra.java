@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.AccionPK;
 import modelo.Compra;
+import modelo.CompraPK;
 
     
 
 
 public class gestionCompra extends javax.swing.JFrame {
 
-    
+    DefaultTableModel listaIDCompraAcc;
     DefaultTableModel listaCompraAcciones;
     AccionPK accPK;
     inicio ini;
@@ -60,7 +61,7 @@ public class gestionCompra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Comprar Accion");
@@ -82,7 +83,7 @@ public class gestionCompra extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel2.setText("Precio");
 
@@ -148,7 +149,7 @@ public class gestionCompra extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         tabCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,6 +170,11 @@ public class gestionCompra extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabCompra);
 
         botEliminar.setText("Eliminar");
+        botEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botEliminarActionPerformed(evt);
+            }
+        });
 
         botModificar.setText("Modificar");
         botModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +297,7 @@ public class gestionCompra extends javax.swing.JFrame {
         this.accPK= accPK;
         selecTabla selTab = new selecTabla();
         this.listaCompraAcciones = selTab.seleccionarCompraAccion(accPK);
-
+        this.listaIDCompraAcc = selTab.seleccionarIDCompraAccion();
         tabCompra.setModel(this.listaCompraAcciones);
        
     }
@@ -342,12 +348,23 @@ public class gestionCompra extends javax.swing.JFrame {
         compA.setNumeroCompra(this.listaCompraAcciones.getValueAt(fila, 3).toString());
         compA.setActivo("true");
         
+        CompraPK comppk = new CompraPK();
+        comppk.setIdCompra(this.listaIDCompraAcc.getValueAt(fila, 0).hashCode());
+        comppk.setIdAccion(this.listaIDCompraAcc.getValueAt(fila, 1).hashCode());
+       
         editarCompra editCom = new editarCompra();
-        editCom.cargarTxt(compA, this.accPK, this);
+        editCom.cargarTxt(compA, comppk,accPK,this);
         editCom.setVisible(true);
-        
+        inhabilitarBot();
         
     }//GEN-LAST:event_botModificarActionPerformed
+
+    private void botEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botEliminarActionPerformed
+        
+        
+        
+        inhabilitarBot();
+    }//GEN-LAST:event_botEliminarActionPerformed
 
     
     public static void main(String args[]) {

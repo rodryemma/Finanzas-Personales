@@ -6,8 +6,10 @@
 
 package vista;
 
+import controlador.editarTabla;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import modelo.AccionPK;
 import modelo.Compra;
 import modelo.CompraPK;
@@ -17,9 +19,12 @@ import modelo.CompraPK;
  * @author Rodry-Escritorio
  */
 public class editarCompra extends javax.swing.JFrame {
-
-    AccionPK accPK;
+    AccionPK accpk;
+    CompraPK comppk;
     gestionCompra gestComp;
+    Compra comp;
+    
+    
     
     public editarCompra() {
         initComponents();
@@ -27,16 +32,33 @@ public class editarCompra extends javax.swing.JFrame {
     }
 
    
-    public void cargarTxt(Compra compra, AccionPK accPK, gestionCompra gestComp){
-     this.accPK= accPK;
-     this.gestComp = gestComp;  
+     public Date obtenerCalendario(){
+        try{
+            Date date =DateMod.getDate();
+            long d = date.getTime();
+            java.sql.Date fecha = new java.sql.Date(d);
+            return fecha; 
+        }
+        catch(java.lang.NullPointerException e){
+            e.printStackTrace(System.out);
+            JOptionPane.showMessageDialog(null, "Seleccionar fecha");
+            return null; 
+        }
         
+    }
+    
+    public void cargarTxt(Compra compra, CompraPK comppk,AccionPK accpk, gestionCompra gestComp){
+     this.accpk=accpk;
+     this.comppk = comppk;
+     this.gestComp = gestComp;  
+     this.comp = compra;  
      txtActivo.setText(compra.getActivo().toString());
      txtCantidad.setText(compra.getCantidad().toString());
      txtNroCompra.setText(compra.getNumeroCompra().toString());
      txtPrecio.setText(compra.getPrecio().toString());
      DateMod.setDate(compra.getFecha());
-     
+        
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -90,12 +112,6 @@ public class editarCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Nro Compra");
 
-        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Activo");
 
         jLabel6.setText("Fecha");
@@ -119,11 +135,11 @@ public class editarCompra extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 28, Short.MAX_VALUE))
+                    .addComponent(DateMod, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,8 +167,18 @@ public class editarCompra extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         botGuardar.setText("Guardar");
+        botGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botGuardarActionPerformed(evt);
+            }
+        });
 
         botCancelar.setText("Cancelar");
+        botCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,9 +222,31 @@ public class editarCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
+    private void botCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botCancelarActionPerformed
+       
+        dispose();
+        
+    }//GEN-LAST:event_botCancelarActionPerformed
+
+    private void botGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botGuardarActionPerformed
+        
+            comp.setActivo(txtActivo.getText().toString());
+            
+            String CantidadInt = txtCantidad.getText().toString();
+            comp.setCantidad(Integer.valueOf(CantidadInt));
+            
+            comp.setFecha(obtenerCalendario());
+            comp.setNumeroCompra(txtNroCompra.getText().toString());
+            
+            String precioD = txtPrecio.getText().toString();
+            comp.setPrecio(Double.parseDouble(precioD));
+        
+        //Crear editarTabla, en el tiempo usar stmt.setDate(3, (Date) compra.getFecha());    
+            editarTabla editTab = new editarTabla();
+            editTab.editarCompra(this.comp, this.comppk);
+            dispose();
+            this.gestComp.cargarVentana(accpk);
+    }//GEN-LAST:event_botGuardarActionPerformed
 
     /**
      * @param args the command line arguments
